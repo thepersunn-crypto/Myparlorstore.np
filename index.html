@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Beauty Studio | Premium Bridal Makeup & Luxury Salon</title>
+<meta name="description" content="Lumière Beauty Studio — Luxury bridal makeup, party makeup, skincare & hair styling. Women-only premium beauty salon. Book your bridal consultation today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose-gold: #C9956B;
+    --rose-gold-light: #E8C4A8;
+    --rose-gold-pale: #F5EBE0;
+    --champagne: #F0DEC8;
+    --gold: #B8924A;
+    --gold-light: #D4AF6A;
+    --ivory: #FAF6F1;
+    --cream: #F5EDE0;
+    --blush: #EDD5C8;
+    --blush-deep: #D4A59A;
+    --dark: #2C1810;
+    --dark-mid: #4A2C20;
+    --dark-light: #6B4535;
+    --text-body: #3D2418;
+    --text-muted: #7A5645;
+    --white: #FFFDF9;
+    --shadow-luxury: 0 20px 60px rgba(44,24,16,0.12);
+    --shadow-card: 0 8px 32px rgba(44,24,16,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ivory);
+    color: var(--text-body);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--rose-gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 99999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: multiply;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid var(--rose-gold);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 99998;
+    transition: transform 0.4s ease, width 0.3s, height 0.3s;
+    opacity: 0.6;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.5s ease;
+  }
+  nav.scrolled {
+    background: rgba(250,246,241,0.96);
+    backdrop-filter: blur(20px);
+    padding: 16px 60px;
+    box-shadow: 0 2px 40px rgba(44,24,16,0.08);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 500;
+    color: var(--white); letter-spacing: 2px;
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+  nav.scrolled .nav-logo { color: var(--dark); }
+  .nav-logo span { color: var(--gold-light); }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav.scrolled .nav-links a { color: var(--text-muted); }
+  .nav-links a::after {
+    content: ''; position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--rose-gold);
+    transform: scaleX(0); transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    background: var(--rose-gold);
+    color: var(--white) !important;
+    padding: 10px 24px;
+    border-radius: 2px;
+    font-size: 12px !important;
+    letter-spacing: 1.5px;
+    transition: background 0.3s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; transform: translateY(-1px); }
+  .nav-cta::after { display: none !important; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: #1a0e08;
+    position: relative;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-slider {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero-slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+  }
+  .hero-slide.active { opacity: 1; z-index: 1; }
+  .hero-slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transform: scale(1.06);
+    transition: transform 8s ease-out;
+  }
+  .hero-slide.active img { transform: scale(1); }
+  .hero-slider-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background:
+      linear-gradient(105deg, rgba(26,14,8,0.92) 0%, rgba(44,24,16,0.75) 42%, rgba(44,24,16,0.35) 68%, rgba(26,14,8,0.5) 100%),
+      linear-gradient(to top, rgba(26,14,8,0.85) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .hero-slide-progress {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    z-index: 4; background: rgba(255,255,255,0.08);
+  }
+  .hero-slide-progress-bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--rose-gold), var(--gold-light));
+    transition: width 0.1s linear;
+  }
+  .hero-indicators {
+    position: absolute; bottom: 32px; right: 60px;
+    z-index: 5; display: flex; gap: 10px; align-items: center;
+  }
+  .hero-indicator {
+    width: 36px; height: 2px;
+    background: rgba(255,255,255,0.2);
+    border: none; cursor: pointer; padding: 0;
+    transition: background 0.4s, width 0.4s;
+    border-radius: 1px;
+  }
+  .hero-indicator.active {
+    width: 48px;
+    background: var(--rose-gold);
+  }
+  .hero-indicator:hover { background: rgba(255,255,255,0.45); }
+
+  .hero-bg-pattern {
+    position: absolute; inset: 0; z-index: 3;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(201,149,107,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(212,175,106,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 60% 80%, rgba(212,165,154,0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-texture {
+    position: absolute; inset: 0; z-index: 3;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(201,149,107,0.02) 40px,
+      rgba(201,149,107,0.02) 41px
+    );
+  }
+
+  .hero-content {
+    position: relative; z-index: 6;
+    padding: 0 60px;
+    max-width: 750px;
+    margin-left: 8%;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(201,149,107,0.15);
+    border: 1px solid rgba(201,149,107,0.3);
+    padding: 8px 20px; border-radius: 2px;
+    margin-bottom: 36px;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-badge span {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--rose-gold-light);
+    font-weight: 400;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--rose-gold);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 90px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 28px;
+    opacity: 0; transform: translateY(30px);
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--rose-gold-light);
+  }
+
+  .hero-sub {
+    font-size: 16px; line-height: 1.8;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px; margin-bottom: 48px;
+    font-weight: 300;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-buttons {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .btn-primary {
+    background: var(--rose-gold);
+    color: var(--white);
+    padding: 16px 36px;
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.5s;
+  }
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,149,107,0.4); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 16px 36px;
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 2px;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--rose-gold);
+    color: var(--rose-gold-light);
+    transform: translateY(-2px);
+  }
+
+  .hero-trust {
+    position: absolute; bottom: 60px; left: 60px; right: 60px;
+    z-index: 6;
+    display: flex; gap: 60px; align-items: center;
+    opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+  }
+  .trust-item {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .trust-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 400;
+    color: var(--rose-gold-light);
+    line-height: 1;
+  }
+  .trust-label {
+    font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+  }
+  .trust-divider {
+    width: 1px; height: 50px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  #particles {
+    position: absolute; inset: 0; z-index: 4;
+    pointer-events: none;
+  }
+
+  /* FLOATING PARTICLES */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float linear infinite;
+    opacity: 0.4;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* MARQUEE */
+  .marquee-section {
+    background: var(--dark);
+    padding: 18px 0;
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    display: flex; align-items: center; gap: 20px;
+    font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+  }
+  .marquee-dot {
+    width: 4px; height: 4px;
+    background: var(--rose-gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS GENERAL */
+  section { padding: 100px 60px; }
+
+  .section-label {
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .section-label span {
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--rose-gold);
+    font-weight: 500;
+  }
+  .section-label::before, .section-label::after {
+    content: ''; flex: 1;
+    height: 1px; background: var(--rose-gold-light);
+    width: 30px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--dark);
+  }
+  .section-title em { font-style: italic; color: var(--rose-gold); }
+
+  .section-sub {
+    font-size: 16px; line-height: 1.8;
+    color: var(--text-muted); max-width: 520px;
+    font-weight: 300; margin-top: 16px;
+  }
+
+  /* TRUST COUNTERS SECTION */
+  #trust {
+    background: var(--dark);
+    padding: 80px 60px;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .trust-card {
+    text-align: center;
+    padding: 60px 40px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .trust-card:last-child { border-right: none; }
+  .trust-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px; font-weight: 300;
+    color: var(--rose-gold-light);
+    line-height: 1;
+    display: block;
+  }
+  .trust-card-label {
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-top: 12px; display: block;
+  }
+  .trust-card-desc {
+    font-size: 13px; color: rgba(255,255,255,0.2);
+    margin-top: 6px; font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .trust-icon {
+    font-size: 20px; margin-bottom: 16px;
+    display: block; color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* SERVICES */
+  #services {
+    background: var(--white);
+  }
+  .services-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 60px;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: var(--ivory);
+    border: 1px solid var(--champagne);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-luxury);
+    border-color: var(--rose-gold-light);
+  }
+  .service-card-img {
+    height: 240px;
+    background-color: var(--dark-mid);
+    background-size: cover;
+    background-position: center;
+    position: relative; overflow: hidden;
+    transition: transform 0.6s ease;
+  }
+  .service-card:hover .service-card-img { transform: scale(1.05); }
+  .service-card-img::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(
+      to top,
+      rgba(44,24,16,0.88) 0%,
+      rgba(44,24,16,0.35) 45%,
+      rgba(44,24,16,0.2) 100%
+    );
+    transition: background 0.4s ease;
+  }
+  .service-card:hover .service-card-img::before {
+    background: linear-gradient(
+      to top,
+      rgba(44,24,16,0.92) 0%,
+      rgba(44,24,16,0.5) 50%,
+      rgba(44,24,16,0.35) 100%
+    );
+  }
+  .service-card-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; align-items: flex-end;
+    padding: 20px;
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .service-card:hover .service-card-overlay { opacity: 1; }
+  .service-whatsapp {
+    color: white; font-size: 12px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    padding-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+  .service-card-body {
+    padding: 24px;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--dark); margin-bottom: 8px;
+  }
+  .service-desc {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.6; font-weight: 300;
+  }
+  .service-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--rose-gold);
+    border-top: 1px solid var(--champagne);
+    padding-top: 12px; width: 100%;
+  }
+
+  /* PORTFOLIO */
+  #portfolio {
+    background: var(--dark);
+    overflow: hidden;
+  }
+  .portfolio-header { margin-bottom: 50px; }
+  .portfolio-header .section-label span { color: var(--rose-gold-light); }
+  .portfolio-header .section-title { color: var(--white); }
+
+  .portfolio-categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .portfolio-category-card {
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    min-height: 320px;
+    background: var(--dark-mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s;
+  }
+  .portfolio-category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    border-color: rgba(201,149,107,0.35);
+  }
+  .portfolio-category-card.featured {
+    grid-column: span 2;
+    min-height: 380px;
+  }
+  .portfolio-cat-bg {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.7s ease;
+  }
+  .portfolio-category-card:hover .portfolio-cat-bg { transform: scale(1.08); }
+  .portfolio-cat-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(26,14,8,0.95) 0%,
+      rgba(44,24,16,0.5) 40%,
+      rgba(44,24,16,0.25) 100%
+    );
+  }
+  .portfolio-cat-content {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 32px;
+  }
+  .portfolio-cat-count {
+    font-size: 10px; letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rose-gold-light);
+    margin-bottom: 8px;
+    opacity: 0.9;
+  }
+  .portfolio-cat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .portfolio-cat-desc {
+    font-size: 13px; color: rgba(255,255,255,0.45);
+    font-weight: 300; line-height: 1.5;
+    max-width: 320px;
+    margin-bottom: 16px;
+  }
+  .portfolio-cat-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose-gold-light);
+    transition: gap 0.3s, color 0.3s;
+  }
+  .portfolio-category-card:hover .portfolio-cat-cta { gap: 14px; color: var(--white); }
+
+  /* GALLERY MODAL */
+  .gallery-modal {
+    position: fixed; inset: 0; z-index: 10000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s;
+  }
+  .gallery-modal.open {
+    opacity: 1; visibility: visible;
+  }
+  .gallery-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(26,14,8,0.94);
+    backdrop-filter: blur(12px);
+  }
+  .gallery-modal-panel {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 1100px;
+    max-height: 92vh;
+    display: flex; flex-direction: column;
+    transform: translateY(24px) scale(0.98);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .gallery-modal.open .gallery-modal-panel {
+    transform: translateY(0) scale(1);
+  }
+  .gallery-modal-header {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px; gap: 20px;
+  }
+  .gallery-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 400; color: var(--white);
+    line-height: 1.1;
+  }
+  .gallery-modal-title em {
+    font-style: italic; color: var(--rose-gold-light);
+  }
+  .gallery-modal-meta {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-top: 6px;
+  }
+  .gallery-close {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.7);
+    font-size: 22px; cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+  .gallery-close:hover {
+    border-color: var(--rose-gold);
+    color: var(--white);
+    background: rgba(201,149,107,0.15);
+  }
+  .gallery-viewer {
+    position: relative;
+    flex: 1; min-height: 0;
+    display: flex; align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .gallery-main-wrap {
+    width: 100%; height: min(65vh, 620px);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .gallery-main-img {
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .gallery-main-img.loaded {
+    opacity: 1; transform: scale(1);
+  }
+  .gallery-nav {
+    position: absolute; top: 50%;
+    transform: translateY(-50%);
+    width: 52px; height: 52px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(44,24,16,0.75);
+    backdrop-filter: blur(8px);
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+    z-index: 2;
+  }
+  .gallery-nav:hover:not(:disabled) {
+    background: var(--rose-gold);
+    border-color: var(--rose-gold);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .gallery-nav:disabled {
+    opacity: 0.25; cursor: not-allowed;
+  }
+  .gallery-prev { left: 16px; }
+  .gallery-next { right: 16px; }
+  .gallery-nav svg {
+    width: 22px; height: 22px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.5;
+  }
+  .gallery-footer {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-top: 16px; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .gallery-caption {
+    font-size: 14px; color: rgba(255,255,255,0.55);
+    font-weight: 300; flex: 1; min-width: 200px;
+  }
+  .gallery-counter {
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose-gold-light);
+    font-variant-numeric: tabular-nums;
+  }
+  .gallery-thumbs {
+    display: flex; gap: 8px;
+    margin-top: 16px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rose-gold) transparent;
+  }
+  .gallery-thumb {
+    flex-shrink: 0;
+    width: 72px; height: 72px;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s, border-color 0.3s;
+    background: var(--dark-mid);
+    padding: 0;
+  }
+  .gallery-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .gallery-thumb.active, .gallery-thumb:hover {
+    opacity: 1;
+    border-color: var(--rose-gold);
+  }
+  body.gallery-open { overflow: hidden; }
+
+  /* WHY CHOOSE US */
+  #why {
+    background: var(--cream);
+  }
+  .why-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .why-list {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .why-item {
+    display: flex; gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--champagne);
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .why-item:last-child { border-bottom: none; }
+  .why-item:hover .why-icon-wrap {
+    background: var(--rose-gold);
+    border-color: var(--rose-gold);
+  }
+  .why-item:hover .why-icon-wrap span { color: white; }
+  .why-icon-wrap {
+    width: 50px; height: 50px; flex-shrink: 0;
+    border: 1px solid var(--rose-gold-light);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .why-icon-wrap span { font-size: 20px; color: var(--rose-gold); transition: color 0.3s; }
+  .why-text-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 400;
+    color: var(--dark); margin-bottom: 4px;
+  }
+  .why-text-desc {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.6; font-weight: 300;
+  }
+  .why-visual {
+    position: relative;
+  }
+  .why-visual-main {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 60%, var(--rose-gold-pale) 100%);
+    height: 500px; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 120px; opacity: 0.5;
+    position: relative; overflow: hidden;
+  }
+  .why-visual-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--dark);
+    padding: 24px; border-radius: 2px;
+    text-align: center;
+  }
+  .why-visual-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; color: var(--rose-gold-light);
+    line-height: 1; display: block;
+  }
+  .why-visual-badge-label {
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    display: block; margin-top: 4px;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials {
+    background: var(--white);
+    overflow: hidden;
+  }
+  .testimonials-slider {
+    position: relative;
+    margin-top: 60px;
+  }
+  .testimonials-track {
+    display: flex; gap: 32px;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .testimonial-card {
+    background: var(--ivory);
+    border: 1px solid var(--champagne);
+    border-radius: 2px;
+    padding: 44px;
+    min-width: 380px; max-width: 380px;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .testimonial-card:hover {
+    box-shadow: var(--shadow-card);
+    transform: translateY(-4px);
+    border-color: var(--rose-gold-light);
+  }
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px; line-height: 0.5;
+    color: var(--rose-gold-light); opacity: 0.5;
+    margin-bottom: 16px; display: block;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; line-height: 1.7;
+    color: var(--dark-mid);
+    font-style: italic; margin-bottom: 28px;
+  }
+  .testimonial-stars {
+    color: var(--gold); font-size: 14px;
+    letter-spacing: 3px; margin-bottom: 20px;
+  }
+  .testimonial-author {
+    display: flex; align-items: center; gap: 14px;
+    border-top: 1px solid var(--champagne);
+    padding-top: 20px;
+  }
+  .testimonial-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blush), var(--champagne));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--dark-mid);
+    flex-shrink: 0;
+  }
+  .testimonial-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 400; color: var(--dark);
+    display: block;
+  }
+  .testimonial-service {
+    font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--rose-gold);
+    display: block; margin-top: 2px;
+  }
+  .slider-controls {
+    display: flex; gap: 12px; margin-top: 44px;
+    align-items: center;
+  }
+  .slider-btn {
+    width: 48px; height: 48px;
+    border: 1px solid var(--rose-gold-light);
+    background: transparent; border-radius: 2px;
+    cursor: pointer; font-size: 18px; color: var(--rose-gold);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .slider-btn:hover {
+    background: var(--rose-gold);
+    color: white; border-color: var(--rose-gold);
+  }
+  .slider-dots {
+    display: flex; gap: 8px; margin-left: 16px;
+  }
+  .slider-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--champagne); cursor: pointer;
+    transition: all 0.3s;
+  }
+  .slider-dot.active {
+    background: var(--rose-gold); width: 24px; border-radius: 3px;
+  }
+
+  /* PROCESS */
+  #process {
+    background: var(--dark);
+    padding: 100px 60px;
+  }
+  .process-header { text-align: center; margin-bottom: 80px; }
+  .process-header .section-title { color: var(--white); }
+  .process-header .section-label span { color: var(--rose-gold-light); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative; max-width: 1100px; margin: 0 auto;
+  }
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 50px; left: calc(12.5% + 24px); right: calc(12.5% + 24px);
+    height: 1px; background: rgba(255,255,255,0.08);
+  }
+  .process-step {
+    text-align: center; padding: 0 30px;
+    position: relative;
+  }
+  .process-step-num {
+    width: 48px; height: 48px;
+    border: 1px solid rgba(201,149,107,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--rose-gold-light);
+    position: relative; z-index: 1;
+    background: var(--dark);
+    transition: all 0.3s;
+  }
+  .process-step:hover .process-step-num {
+    background: var(--rose-gold);
+    border-color: var(--rose-gold);
+    color: white;
+  }
+  .process-step-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .process-step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: white; margin-bottom: 12px;
+  }
+  .process-step-desc {
+    font-size: 13px; color: rgba(255,255,255,0.35);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  /* TEAM */
+  #team {
+    background: var(--cream);
+  }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; margin-top: 60px;
+  }
+  .team-card {
+    text-align: center;
+    position: relative;
+  }
+  .team-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--dark-mid);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
+    border: 1px solid var(--champagne);
+  }
+  .team-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    transition: transform 0.6s ease;
+  }
+  .team-card:hover .team-photo {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-luxury);
+    border-color: var(--rose-gold-light);
+  }
+  .team-card:hover .team-photo img {
+    transform: scale(1.06);
+  }
+  .team-photo::after {
+    content: '';
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(
+      to top,
+      rgba(44,24,16,0.35) 0%,
+      transparent 45%
+    );
+    pointer-events: none;
+  }
+  .team-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; color: var(--dark); margin-bottom: 4px;
+  }
+  .team-role {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--rose-gold);
+    margin-bottom: 8px; display: block;
+  }
+  .team-exp {
+    font-size: 13px; color: var(--text-muted); font-weight: 300;
+  }
+  .team-specialty {
+    display: flex; gap: 8px; justify-content: center;
+    flex-wrap: wrap; margin-top: 12px;
+  }
+  .team-tag {
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--rose-gold);
+    background: var(--rose-gold-pale);
+    padding: 4px 10px; border-radius: 1px;
+  }
+
+  /* PACKAGES */
+  #packages {
+    background: var(--white);
+  }
+  .packages-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px; margin-top: 60px;
+  }
+  .package-card {
+    border: 1px solid var(--champagne);
+    border-radius: 2px; padding: 50px 40px;
+    position: relative; transition: all 0.4s;
+    background: var(--ivory);
+  }
+  .package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-luxury);
+  }
+  .package-card.featured {
+    background: var(--dark);
+    border-color: var(--rose-gold);
+  }
+  .package-featured-badge {
+    position: absolute; top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--rose-gold);
+    color: white; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 20px;
+  }
+  .package-tier {
+    font-size: 10px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--rose-gold);
+    margin-bottom: 16px; display: block;
+  }
+  .package-card.featured .package-tier { color: var(--rose-gold-light); }
+  .package-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300; color: var(--dark);
+    margin-bottom: 8px; line-height: 1;
+  }
+  .package-card.featured .package-name { color: white; }
+  .package-desc {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.6; font-weight: 300; margin-bottom: 32px;
+  }
+  .package-card.featured .package-desc { color: rgba(255,255,255,0.4); }
+  .package-divider {
+    height: 1px; background: var(--champagne);
+    margin-bottom: 28px;
+  }
+  .package-card.featured .package-divider { background: rgba(255,255,255,0.1); }
+  .package-features {
+    list-style: none; display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 36px;
+  }
+  .package-features li {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--text-muted); font-weight: 300;
+  }
+  .package-card.featured .package-features li { color: rgba(255,255,255,0.5); }
+  .package-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--rose-gold-pale);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 10px; color: var(--rose-gold);
+  }
+  .package-card.featured .package-check {
+    background: rgba(201,149,107,0.2); color: var(--rose-gold-light);
+  }
+  .package-cta {
+    display: block; text-align: center;
+    padding: 14px 32px;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px; transition: all 0.3s;
+  }
+  .package-cta-outline {
+    border: 1px solid var(--rose-gold-light);
+    color: var(--rose-gold);
+  }
+  .package-cta-outline:hover {
+    background: var(--rose-gold);
+    color: white; border-color: var(--rose-gold);
+  }
+  .package-cta-solid {
+    background: var(--rose-gold);
+    color: white; border: 1px solid var(--rose-gold);
+  }
+  .package-cta-solid:hover {
+    background: var(--gold); border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201,149,107,0.4);
+  }
+
+  /* FAQ */
+  #faq {
+    background: var(--ivory);
+  }
+  .faq-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .faq-list {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--champagne);
+  }
+  .faq-question {
+    width: 100%; display: flex; justify-content: space-between;
+    align-items: center; padding: 24px 0;
+    background: none; border: none; cursor: pointer;
+    text-align: left; gap: 16px;
+  }
+  .faq-q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 400;
+    color: var(--dark);
+  }
+  .faq-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border: 1px solid var(--rose-gold-light);
+    border-radius: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--rose-gold);
+    transition: all 0.3s;
+  }
+  .faq-item.open .faq-icon {
+    background: var(--rose-gold); color: white;
+    border-color: var(--rose-gold);
+    transform: rotate(45deg);
+  }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-answer { max-height: 200px; }
+  .faq-answer p {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.7; padding-bottom: 24px; font-weight: 300;
+  }
+  .faq-cta-box {
+    background: var(--dark);
+    padding: 50px; border-radius: 2px;
+    position: sticky; top: 120px;
+  }
+  .faq-cta-box .section-label span { color: var(--rose-gold-light); }
+  .faq-cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; color: white; font-weight: 300;
+    line-height: 1.2; margin-bottom: 16px;
+  }
+  .faq-cta-title em { font-style: italic; color: var(--rose-gold-light); }
+  .faq-cta-desc {
+    font-size: 14px; color: rgba(255,255,255,0.4);
+    line-height: 1.7; margin-bottom: 32px; font-weight: 300;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--cream);
+  }
+  .contact-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 32px; }
+  .contact-item {
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: var(--dark);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .contact-item-label {
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--rose-gold);
+    display: block; margin-bottom: 4px;
+  }
+  .contact-item-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--dark);
+    display: block;
+  }
+  .contact-item-sub {
+    font-size: 13px; color: var(--text-muted);
+    font-weight: 300; display: block; margin-top: 2px;
+  }
+  .map-placeholder {
+    background: linear-gradient(135deg, var(--blush), var(--champagne));
+    height: 400px; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px; opacity: 0.4;
+    position: relative;
+  }
+  .map-pin {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -80%);
+    font-size: 40px;
+    animation: mapPulse 2s ease-in-out infinite;
+  }
+  @keyframes mapPulse {
+    0%, 100% { transform: translate(-50%, -80%); }
+    50% { transform: translate(-50%, -90%); }
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 80px 60px 40px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+  .footer-brand-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; color: white;
+    letter-spacing: 2px; margin-bottom: 16px; display: block;
+  }
+  .footer-brand-logo span { color: var(--rose-gold); }
+  .footer-brand-desc {
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    line-height: 1.7; font-weight: 300; max-width: 280px;
+    margin-bottom: 24px;
+  }
+  .footer-socials {
+    display: flex; gap: 12px;
+  }
+  .footer-social {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .footer-social:hover {
+    border-color: var(--rose-gold);
+    color: var(--rose-gold-light);
+  }
+  .footer-col-title {
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    margin-bottom: 20px; display: block;
+  }
+  .footer-links {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+  }
+  .footer-links a {
+    font-size: 14px; color: rgba(255,255,255,0.4);
+    text-decoration: none; font-weight: 300;
+    transition: color 0.3s;
+    font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  }
+  .footer-links a:hover { color: var(--rose-gold-light); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-copy {
+    font-size: 12px; color: rgba(255,255,255,0.2);
+    font-weight: 300;
+  }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px; color: rgba(255,255,255,0.2);
+    font-style: italic;
+  }
+
+  /* FLOATING WHATSAPP */
+  .wa-float {
+    position: fixed; bottom: 32px; right: 32px;
+    z-index: 9999;
+    display: flex; align-items: center; gap: 12px;
+    background: #25D366;
+    color: white; text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 2px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.4);
+    transition: all 0.3s;
+    animation: waPulse 3s ease-in-out infinite;
+  }
+  .wa-float:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(37,211,102,0.5);
+  }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+  }
+  .wa-icon { font-size: 20px; }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* MOBILE MENU */
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer;
+    padding: 8px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 1px;
+    background: white; transition: all 0.3s;
+  }
+  nav.scrolled .hamburger span { background: var(--dark); }
+  .mobile-menu {
+    display: none; position: fixed;
+    inset: 0; background: var(--dark);
+    z-index: 999; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; color: white; text-decoration: none;
+    letter-spacing: 2px;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--rose-gold-light); }
+  .mobile-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: none; cursor: pointer;
+    font-size: 28px; color: rgba(255,255,255,0.4);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-card { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 32px; }
+    nav.scrolled { padding: 14px 32px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 32px; }
+    #trust { padding: 60px 32px; }
+    .hero-content { padding: 0 32px; margin-left: 0; max-width: 100%; }
+    .hero-trust { left: 32px; right: 32px; }
+    .hero-headline { font-size: clamp(42px, 9vw, 70px); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-categories { grid-template-columns: repeat(2, 1fr); }
+    .portfolio-category-card.featured { grid-column: span 2; }
+    .hero-indicators { right: 32px; bottom: 28px; }
+    .why-layout { grid-template-columns: 1fr; }
+    .why-visual { display: none; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .packages-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .faq-layout { grid-template-columns: 1fr; }
+    .contact-layout { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .process-steps::before { display: none; }
+    .hero-trust { display: none; }
+    #particles { display: none; }
+  }
+
+  @media (hover: none) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
+  @media (max-width: 580px) {
+    section { padding: 60px 20px; }
+    #trust { padding: 50px 20px; }
+    .trust-grid { grid-template-columns: 1fr 1fr; }
+    .trust-card { padding: 40px 20px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-categories { grid-template-columns: 1fr; }
+    .portfolio-category-card.featured { grid-column: 1; min-height: 300px; }
+    .portfolio-category-card { min-height: 280px; }
+    .hero-indicators { right: 20px; bottom: 20px; }
+    .gallery-nav { width: 44px; height: 44px; }
+    .gallery-prev { left: 8px; }
+    .gallery-next { right: 8px; }
+    .gallery-main-wrap { height: 50vh; }
+    .team-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr; }
+    nav { padding: 16px 20px; }
+    .hero-content { padding: 0 20px; }
+    .hero-headline { font-size: clamp(36px, 10vw, 56px); }
+    .hero-buttons { flex-direction: column; }
+    .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20know%20about%20bridal%20makeup%20services." class="wa-float" target="_blank">
+  <span class="wa-icon">💬</span>
+  Book on WhatsApp
+</a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Lumière <span>Beauty</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20consultation." class="nav-cta" target="_blank">Book Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Portfolio</a>
+  <a href="#packages" onclick="closeMobileMenu()">Packages</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20consultation." target="_blank" style="color: #25D366;">Book on WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-slider" id="heroSlider" aria-hidden="true">
+    <div class="hero-slide active">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=85&auto=format&fit=crop" alt="Luxury bridal makeup portrait" loading="eager">
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1522337360788-8eee6154e1f8?w=1920&q=85&auto=format&fit=crop" alt="Professional makeup artistry" loading="lazy">
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1560066984-138ddeb4c94e?w=1920&q=85&auto=format&fit=crop" alt="Premium beauty salon experience" loading="lazy">
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1521590839619-a15c0966a4de?w=1920&q=85&auto=format&fit=crop" alt="Elegant bridal hair styling" loading="lazy">
+    </div>
+    <div class="hero-slide">
+      <img src="https://images.unsplash.com/photo-1487412940904-118106001604?w=1920&q=85&auto=format&fit=crop" alt="Radiant bridal glow" loading="lazy">
+    </div>
+  </div>
+  <div class="hero-slider-overlay"></div>
+  <div class="hero-slide-progress" aria-hidden="true">
+    <div class="hero-slide-progress-bar" id="heroProgressBar"></div>
+  </div>
+
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-texture"></div>
+
+  <!-- Particles -->
+  <div id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>Women-Only Premium Beauty Studio</span>
+    </div>
+
+    <h1 class="hero-headline">
+      Reveal Your<br>Most <em>Beautiful</em><br>Bridal Glow
+    </h1>
+
+    <p class="hero-sub">
+      Where artistry meets elegance — luxury bridal makeup, skincare, and hair styling crafted with precision, passion, and premium products for your most special day.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20a%20bridal%20makeup%20consultation." class="btn-primary" target="_blank">
+        💬 Book Bridal Consultation
+      </a>
+      <a href="#portfolio" class="btn-ghost">
+        ✦ View Our Portfolio
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-trust">
+    <div class="trust-item">
+      <span class="trust-num">500+</span>
+      <span class="trust-label">Happy Brides</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-num">7+</span>
+      <span class="trust-label">Years Experience</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-num">1200+</span>
+      <span class="trust-label">Services Done</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-num">100%</span>
+      <span class="trust-label">Women-Only Safe Space</span>
+    </div>
+  </div>
+
+  <div class="hero-indicators" id="heroIndicators" role="tablist" aria-label="Hero slides"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Bridal Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Hair Styling</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Skincare Treatment</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>HD Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Party Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Hair Spa</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Nail Art</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Mehendi Services</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Facial & Glow</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Engagement Makeup</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Bridal Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Hair Styling</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Skincare Treatment</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>HD Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Party Makeup</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Hair Spa</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Nail Art</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Mehendi Services</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Facial & Glow</span></div>
+    <div class="marquee-item"><span class="marquee-dot"></span><span>Engagement Makeup</span></div>
+  </div>
+</div>
+
+<!-- TRUST COUNTERS -->
+<section id="trust">
+  <div class="trust-grid">
+    <div class="trust-card reveal">
+      <span class="trust-icon">✦</span>
+      <span class="trust-card-num" data-count="500">0</span>
+      <span class="trust-card-label">Happy Brides</span>
+      <span class="trust-card-desc">Real transformations, real happiness</span>
+    </div>
+    <div class="trust-card reveal reveal-delay-1">
+      <span class="trust-icon">◆</span>
+      <span class="trust-card-num" data-count="7">0</span>
+      <span class="trust-card-label">Years of Mastery</span>
+      <span class="trust-card-desc">Dedicated to bridal artistry</span>
+    </div>
+    <div class="trust-card reveal reveal-delay-2">
+      <span class="trust-icon">❋</span>
+      <span class="trust-card-num" data-count="1200">0</span>
+      <span class="trust-card-label">Beauty Services</span>
+      <span class="trust-card-desc">Delivered with love & precision</span>
+    </div>
+    <div class="trust-card reveal reveal-delay-3">
+      <span class="trust-icon">♛</span>
+      <span class="trust-card-num" data-count="100">0</span>
+      <span class="trust-card-label">% Client Satisfaction</span>
+      <span class="trust-card-desc">We don't stop until you shine</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label"><span>Our Expertise</span></div>
+      <h2 class="section-title reveal">Luxury Beauty<br><em>Services</em></h2>
+    </div>
+    <p class="section-sub reveal">Every service crafted with premium products, expert hands, and a deep commitment to making you feel extraordinary.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Bridal%20Makeup." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Bridal Makeup</div>
+        <div class="service-desc">Flawless, long-lasting bridal looks crafted to perfection for your most magical day.</div>
+        <div class="service-tag">✦ Signature Service</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1522337360788-8eee6154e1f8?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20HD%20Makeup." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">HD Makeup</div>
+        <div class="service-desc">High-definition makeup techniques for flawless on-camera and in-person appearance.</div>
+        <div class="service-tag">✦ Camera Ready</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1596462502278-5bf4c9d64af7?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Party%20Makeup." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Party Makeup</div>
+        <div class="service-desc">Glamorous, bold looks for every celebration — from intimate gatherings to grand events.</div>
+        <div class="service-tag">✦ Glamour Edition</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1606800052055-536a3ddc2f1f?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Engagement%20Makeup." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Engagement Makeup</div>
+        <div class="service-desc">Elegant and romantic looks for your engagement ceremony — you deserve to dazzle.</div>
+        <div class="service-tag">✦ Romantic Look</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Skincare%20Treatment." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Skincare Treatments</div>
+        <div class="service-desc">Advanced skincare rituals using premium products for your most radiant skin ever.</div>
+        <div class="service-tag">✦ Glow Protocol</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1521590839619-a15c0966a4de?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Hair%20Styling." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Hair Styling</div>
+        <div class="service-desc">Stunning bridal hairstyles, blowouts, updos and waves that last all day.</div>
+        <div class="service-tag">✦ Expert Styling</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1560066984-138ddeb4c94e?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Facial%20Services." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Facial Services</div>
+        <div class="service-desc">Deep cleansing, brightening, and anti-aging facials for luminous, healthy skin.</div>
+        <div class="service-tag">✦ Luxury Ritual</div>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-card-img" style="background-image:url('https://images.unsplash.com/photo-1604654898464-9f9f0a1355c3?w=800&q=80&auto=format&fit=crop')">
+        <div class="service-card-overlay"><a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20inquire%20about%20Nail%20Services." class="service-whatsapp" target="_blank">Enquire Now →</a></div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-name">Nail Art & Care</div>
+        <div class="service-desc">Artistic nail extensions, gel polish, and nail art designs to complete your look.</div>
+        <div class="service-tag">✦ Artisan Nails</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="portfolio-header reveal">
+    <div class="section-label"><span>Our Work</span></div>
+    <h2 class="section-title">Bridal <em>Portfolio</em></h2>
+    <p class="section-sub" style="color: rgba(255,255,255,0.35); margin-top: 12px;">Select a category to explore our work — browse each collection with smooth gallery navigation.</p>
+  </div>
+
+  <div class="portfolio-categories reveal" id="portfolioCategories">
+    <article class="portfolio-category-card featured" data-gallery="bridal-makeup" tabindex="0" role="button" aria-label="View Bridal Makeup gallery">
+      <div class="portfolio-cat-bg" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format&fit=crop')"></div>
+      <div class="portfolio-cat-content">
+        <span class="portfolio-cat-count">6 Looks</span>
+        <h3 class="portfolio-cat-title">Bridal Makeup</h3>
+        <p class="portfolio-cat-desc">Signature bridal transformations — timeless elegance for your wedding day.</p>
+        <span class="portfolio-cat-cta">View Gallery →</span>
+      </div>
+    </article>
+
+    <article class="portfolio-category-card" data-gallery="reception" tabindex="0" role="button" aria-label="View Reception Look gallery">
+      <div class="portfolio-cat-bg" style="background-image:url('https://images.unsplash.com/photo-1487412940904-118106001604?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="portfolio-cat-content">
+        <span class="portfolio-cat-count">5 Looks</span>
+        <h3 class="portfolio-cat-title">Reception Look</h3>
+        <p class="portfolio-cat-desc">Radiant HD finishes crafted for evening celebrations and photography.</p>
+        <span class="portfolio-cat-cta">View Gallery →</span>
+      </div>
+    </article>
+
+    <article class="portfolio-category-card" data-gallery="engagement" tabindex="0" role="button" aria-label="View Engagement gallery">
+      <div class="portfolio-cat-bg" style="background-image:url('https://images.unsplash.com/photo-1606800052055-536a3ddc2f1f?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="portfolio-cat-content">
+        <span class="portfolio-cat-count">5 Looks</span>
+        <h3 class="portfolio-cat-title">Engagement</h3>
+        <p class="portfolio-cat-desc">Soft, romantic artistry for your most cherished pre-wedding moments.</p>
+        <span class="portfolio-cat-cta">View Gallery →</span>
+      </div>
+    </article>
+
+    <article class="portfolio-category-card" data-gallery="party-makeup" tabindex="0" role="button" aria-label="View Party Makeup gallery">
+      <div class="portfolio-cat-bg" style="background-image:url('https://images.unsplash.com/photo-1596462502278-5bf4c9d64af7?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="portfolio-cat-content">
+        <span class="portfolio-cat-count">5 Looks</span>
+        <h3 class="portfolio-cat-title">Party Makeup</h3>
+        <p class="portfolio-cat-desc">Bold glamour and festive glow for sangeet, cocktails, and celebrations.</p>
+        <span class="portfolio-cat-cta">View Gallery →</span>
+      </div>
+    </article>
+
+    <article class="portfolio-category-card" data-gallery="hair-styling" tabindex="0" role="button" aria-label="View Hair Styling gallery">
+      <div class="portfolio-cat-bg" style="background-image:url('https://images.unsplash.com/photo-1521590839619-a15c0966a4de?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="portfolio-cat-content">
+        <span class="portfolio-cat-count">5 Looks</span>
+        <h3 class="portfolio-cat-title">Hair Styling</h3>
+        <p class="portfolio-cat-desc">Couture updos, waves, and bridal hairstyles that last all day.</p>
+        <span class="portfolio-cat-cta">View Gallery →</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PORTFOLIO GALLERY MODAL -->
+<div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle" aria-hidden="true">
+  <div class="gallery-modal-backdrop" id="galleryBackdrop"></div>
+  <div class="gallery-modal-panel">
+    <div class="gallery-modal-header">
+      <div>
+        <h2 class="gallery-modal-title" id="galleryModalTitle">Bridal <em>Makeup</em></h2>
+        <p class="gallery-modal-meta" id="galleryModalMeta">Signature bridal collection</p>
+      </div>
+      <button type="button" class="gallery-close" id="galleryClose" aria-label="Close gallery">✕</button>
+    </div>
+    <div class="gallery-viewer">
+      <button type="button" class="gallery-nav gallery-prev" id="galleryPrev" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <div class="gallery-main-wrap">
+        <img class="gallery-main-img" id="galleryMainImg" src="" alt="">
+      </div>
+      <button type="button" class="gallery-nav gallery-next" id="galleryNext" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="gallery-footer">
+      <p class="gallery-caption" id="galleryCaption"></p>
+      <span class="gallery-counter" id="galleryCounter">1 / 6</span>
+    </div>
+    <div class="gallery-thumbs" id="galleryThumbs" role="tablist" aria-label="Gallery thumbnails"></div>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="why-layout">
+    <div>
+      <div class="section-label reveal"><span>Why Lumière</span></div>
+      <h2 class="section-title reveal">Why Brides<br>Choose <em>Us</em></h2>
+      <p class="section-sub reveal">We don't just apply makeup — we create confidence, beauty, and memories that last a lifetime.</p>
+
+      <div class="why-list" style="margin-top: 40px;">
+        <div class="why-item reveal">
+          <div class="why-icon-wrap"><span>🏆</span></div>
+          <div>
+            <div class="why-text-title">Certified Bridal Specialists</div>
+            <div class="why-text-desc">Our artists hold professional certifications in bridal makeup artistry with specialised training in Indian and international bridal looks.</div>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-1">
+          <div class="why-icon-wrap"><span>💎</span></div>
+          <div>
+            <div class="why-text-title">Premium Branded Products</div>
+            <div class="why-text-desc">We exclusively use luxury brands — MAC, Charlotte Tilbury, Huda Beauty, and more — ensuring a flawless, long-lasting finish.</div>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-2">
+          <div class="why-icon-wrap"><span>🌿</span></div>
+          <div>
+            <div class="why-text-title">Hygienic & Safe Environment</div>
+            <div class="why-text-desc">A women-only sanctuary with hospital-grade hygiene standards. Your comfort and safety is our highest priority.</div>
+          </div>
+        </div>
+        <div class="why-item reveal reveal-delay-3">
+          <div class="why-icon-wrap"><span>👸</span></div>
+          <div>
+            <div class="why-text-title">Personalised Consultation</div>
+            <div class="why-text-desc">Every bride is unique. We offer detailed consultations to understand your vision and create your perfect look.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual">
+      <div class="why-visual-main">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:110px;opacity:0.2;">👰</div>
+        <div style="position:absolute;top:20px;left:20px;right:20px;bottom:20px;border:1px solid rgba(201,149,107,0.15);border-radius:2px;"></div>
+      </div>
+      <div class="why-visual-badge">
+        <span class="why-visual-badge-num">500+</span>
+        <span class="why-visual-badge-label">Brides Transformed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label reveal"><span>Happy Brides</span></div>
+  <h2 class="section-title reveal">What Our Brides<br><em>Say About Us</em></h2>
+
+  <div class="testimonials-slider">
+    <div class="testimonials-track" id="testimonialsTrack">
+
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">Lumière made me feel like an absolute queen on my wedding day. The bridal makeup was flawless, exactly what I had dreamed of. Everyone kept asking who did my makeup!</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <span class="testimonial-name">Priya Sharma</span>
+            <span class="testimonial-service">Signature Bridal Makeup</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">I was nervous before my reception but the team at Lumière calmed me down and created the most gorgeous look. My photos look like they're from a magazine. Absolutely worth every penny!</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <span class="testimonial-name">Aarti Gupta</span>
+            <span class="testimonial-service">Reception Bridal Look</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">The skincare treatment before my wedding was a total game changer. My skin was glowing like never before! And the bridal trial ensured there were zero surprises on the big day.</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <span class="testimonial-name">Meena Verma</span>
+            <span class="testimonial-service">Bridal Skincare + Makeup</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">From the moment I walked in, I felt pampered and special. The women-only environment made me so comfortable. The engagement makeup was beyond perfection — ethereal and elegant!</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <span class="testimonial-name">Sunita Patel</span>
+            <span class="testimonial-service">Engagement Makeup</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text">My hair styling for the wedding was absolutely perfect. My veil sat beautifully all day, and not a single hair was out of place after 12 hours of celebration. Pure magic!</p>
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <span class="testimonial-name">Riya Singh</span>
+            <span class="testimonial-service">Bridal Hair Styling</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn" id="sliderPrev">←</button>
+      <button class="slider-btn" id="sliderNext">→</button>
+      <div class="slider-dots" id="sliderDots">
+        <div class="slider-dot active"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+        <div class="slider-dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header">
+    <div class="section-label" style="justify-content:center;"><span>How It Works</span></div>
+    <h2 class="section-title" style="color:white;text-align:center;">Your <em>Luxury</em> Beauty Journey</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="process-step-num">01</div>
+      <span class="process-step-icon">💬</span>
+      <div class="process-step-title">Consultation</div>
+      <p class="process-step-desc">Connect with us on WhatsApp or visit the salon for a personalised beauty consultation to discuss your vision and needs.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-1">
+      <div class="process-step-num">02</div>
+      <span class="process-step-icon">📋</span>
+      <div class="process-step-title">Beauty Planning</div>
+      <p class="process-step-desc">We curate your complete beauty plan — from skincare prep to makeup trials — tailored perfectly to your features and event.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-2">
+      <div class="process-step-num">03</div>
+      <span class="process-step-icon">✨</span>
+      <div class="process-step-title">Makeup & Styling</div>
+      <p class="process-step-desc">On your special day, our expert artists work their magic with premium products, creating your perfect bridal look.</p>
+    </div>
+    <div class="process-step reveal reveal-delay-3">
+      <div class="process-step-num">04</div>
+      <span class="process-step-icon">👑</span>
+      <div class="process-step-title">Your Transformation</div>
+      <p class="process-step-desc">Walk out feeling like royalty — confident, radiant, and absolutely breathtaking for the most important day of your life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-label reveal"><span>Meet The Artists</span></div>
+  <h2 class="section-title reveal">The Hands Behind<br><em>Your Beauty</em></h2>
+  <p class="section-sub reveal">Our certified beauty experts bring years of passion, artistry, and precision to every client they serve.</p>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="https://images.unsplash.com/photo-1580618672099-531aac0849f2?w=600&q=85&auto=format&fit=crop" alt="Anjali Kapoor — Lead Bridal Artist at Lumière Beauty Studio" loading="lazy" width="600" height="750">
+      </div>
+      <div class="team-name">Anjali Kapoor</div>
+      <span class="team-role">Lead Bridal Artist</span>
+      <div class="team-exp">8+ Years Experience · 300+ Brides</div>
+      <div class="team-specialty">
+        <span class="team-tag">Bridal Makeup</span>
+        <span class="team-tag">HD Makeup</span>
+        <span class="team-tag">Airbrush</span>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-photo">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85&auto=format&fit=crop" alt="Neha Sharma — Skincare Specialist at Lumière Beauty Studio" loading="lazy" width="600" height="750">
+      </div>
+      <div class="team-name">Neha Sharma</div>
+      <span class="team-role">Skincare Specialist</span>
+      <div class="team-exp">6+ Years Experience · Certified Aesthetician</div>
+      <div class="team-specialty">
+        <span class="team-tag">Skincare</span>
+        <span class="team-tag">Facials</span>
+        <span class="team-tag">Glow Treatments</span>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-photo">
+        <img src="https://images.unsplash.com/photo-1595476100620-652b1afa5950?w=600&q=85&auto=format&fit=crop" alt="Preethi Menon — Hair Styling Expert at Lumière Beauty Studio" loading="lazy" width="600" height="750">
+      </div>
+      <div class="team-name">Preethi Menon</div>
+      <span class="team-role">Hair Styling Expert</span>
+      <div class="team-exp">7+ Years Experience · Bridal Hair Specialist</div>
+      <div class="team-specialty">
+        <span class="team-tag">Bridal Hair</span>
+        <span class="team-tag">Updos</span>
+        <span class="team-tag">Hair Spa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="section-label reveal"><span>Bridal Packages</span></div>
+  <h2 class="section-title reveal">Curated <em>Bridal</em><br>Beauty Packages</h2>
+  <p class="section-sub reveal">Everything you need for your most beautiful day, beautifully bundled.</p>
+
+  <div class="packages-grid">
+    <div class="package-card reveal">
+      <span class="package-tier">Classic</span>
+      <div class="package-name">Bridal Bliss</div>
+      <p class="package-desc">Perfect for intimate weddings and civil ceremonies with essential bridal beauty services.</p>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li><span class="package-check">✓</span> Bridal Makeup (HD)</li>
+        <li><span class="package-check">✓</span> Hair Styling</li>
+        <li><span class="package-check">✓</span> Saree/Lehenga Draping</li>
+        <li><span class="package-check">✓</span> Basic Skincare</li>
+        <li><span class="package-check">✓</span> Eyebrow Shaping</li>
+        <li><span class="package-check">✓</span> Touch-up Kit</li>
+      </ul>
+      <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20know%20about%20the%20Bridal%20Bliss%20Package." class="package-cta package-cta-outline" target="_blank">Enquire on WhatsApp</a>
+    </div>
+
+    <div class="package-card featured reveal reveal-delay-1">
+      <div class="package-featured-badge">Most Popular</div>
+      <span class="package-tier">Premium</span>
+      <div class="package-name">Royal Bride</div>
+      <p class="package-desc">Our signature bridal package — complete luxury experience for the modern Indian bride.</p>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li><span class="package-check">✓</span> Signature Bridal Makeup</li>
+        <li><span class="package-check">✓</span> Luxury Hair Styling</li>
+        <li><span class="package-check">✓</span> Pre-bridal Skincare Session</li>
+        <li><span class="package-check">✓</span> Bridal Trial Included</li>
+        <li><span class="package-check">✓</span> Nail Art & Mehendi</li>
+        <li><span class="package-check">✓</span> Full Day Touch-up Artist</li>
+        <li><span class="package-check">✓</span> Premium Product Guarantee</li>
+      </ul>
+      <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20know%20about%20the%20Royal%20Bride%20Package." class="package-cta package-cta-solid" target="_blank">Book This Package</a>
+    </div>
+
+    <div class="package-card reveal reveal-delay-2">
+      <span class="package-tier">Complete</span>
+      <div class="package-name">Wedding Suite</div>
+      <p class="package-desc">The ultimate wedding experience — covering your entire celebration from engagement to reception.</p>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li><span class="package-check">✓</span> Engagement Makeup</li>
+        <li><span class="package-check">✓</span> Bridal Day Makeup</li>
+        <li><span class="package-check">✓</span> Reception Makeup</li>
+        <li><span class="package-check">✓</span> 3 Hair Styling Sessions</li>
+        <li><span class="package-check">✓</span> Complete Skincare Program</li>
+        <li><span class="package-check">✓</span> Bridal Party Makeup (2)</li>
+        <li><span class="package-check">✓</span> VIP Priority Booking</li>
+      </ul>
+      <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20know%20about%20the%20Wedding%20Suite%20Package." class="package-cta package-cta-outline" target="_blank">Enquire on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div>
+      <div class="section-label reveal"><span>Questions</span></div>
+      <h2 class="section-title reveal">Frequently<br>Asked <em>Questions</em></h2>
+      <p class="section-sub reveal" style="margin-bottom:40px;">Everything you need to know before your visit.</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Do I need to book in advance?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes, we strongly recommend advance booking — especially for bridal services. Bridal makeup slots often fill up weeks in advance, particularly during wedding season. Please contact us on WhatsApp to secure your date.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Which makeup products do you use?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>We exclusively use internationally renowned premium brands including MAC, Charlotte Tilbury, Huda Beauty, NARS, and other luxury labels. All products are cruelty-free and skin-safe, sourced directly from authorised retailers.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Is a bridal trial available?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Absolutely! We highly recommend a bridal trial 1–2 weeks before your wedding day. It allows us to perfect your look together, adjust to your preferences, and ensure you feel 100% confident on the big day. Trial sessions are included in our premium packages.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How long does bridal makeup take?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>A complete bridal makeup session typically takes 2.5 to 4 hours, depending on the complexity of the look. When combined with hair styling, plan for 4–5 hours. We recommend scheduling an early start to allow ample time.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Can I consult via WhatsApp before booking?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes! WhatsApp consultation is our preferred first step. You can share your inspiration photos, ask questions, get package details, and discuss dates — all comfortably from home before your visit.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Is this a women-only salon?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer"><p>Yes, Lumière Beauty Studio is exclusively for women. We provide a safe, private, and comfortable environment where you can relax fully and enjoy your beauty experience without any concern.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="faq-cta-box reveal">
+        <div class="section-label"><span>Still Have Questions?</span></div>
+        <h3 class="faq-cta-title">We're Here to<br><em>Help You Shine</em></h3>
+        <p class="faq-cta-desc">Our beauty experts are available on WhatsApp to answer any questions, discuss your requirements, and help you plan your perfect beauty experience.</p>
+        <a href="https://wa.me/919999999999?text=Hello%2C%20I%20have%20a%20question%20about%20your%20services." class="btn-primary" target="_blank" style="display:inline-flex;">
+          💬 Chat With Us Now
+        </a>
+        <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:8px;">Response Time</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(255,255,255,0.6);">Usually within 30 minutes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal"><span>Visit Us</span></div>
+  <h2 class="section-title reveal">Find Us &<br><em>Get In Touch</em></h2>
+  <p class="section-sub reveal" style="margin-bottom:60px;">We'd love to welcome you to our studio. Come in for a consultation or book your appointment today.</p>
+
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="contact-item reveal">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <span class="contact-item-label">Location</span>
+          <span class="contact-item-value">Lumière Beauty Studio</span>
+          <span class="contact-item-sub">123, Rose Garden Complex, Near City Mall<br>Your City — 110001</span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-1">
+        <div class="contact-item-icon">📞</div>
+        <div>
+          <span class="contact-item-label">Phone / WhatsApp</span>
+          <span class="contact-item-value">+91 99999 99999</span>
+          <span class="contact-item-sub">Click to start WhatsApp conversation</span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-2">
+        <div class="contact-item-icon">🕐</div>
+        <div>
+          <span class="contact-item-label">Opening Hours</span>
+          <span class="contact-item-value">9:00 AM — 8:00 PM</span>
+          <span class="contact-item-sub">Monday to Saturday · Sunday by appointment</span>
+        </div>
+      </div>
+      <div class="contact-item reveal reveal-delay-3">
+        <div class="contact-item-icon">✨</div>
+        <div>
+          <span class="contact-item-label">Bridal Bookings</span>
+          <span class="contact-item-value">WhatsApp Preferred</span>
+          <span class="contact-item-sub">Share your date and requirements for personalized quote</span>
+        </div>
+      </div>
+
+      <a href="https://wa.me/919999999999?text=Hello%2C%20I%20want%20to%20book%20an%20appointment%20at%20Lumière%20Beauty%20Studio." class="btn-primary" target="_blank" style="margin-top:12px;width:fit-content;">
+        💬 Book Appointment on WhatsApp
+      </a>
+    </div>
+
+    <div class="map-placeholder reveal">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,#EDD5C8,#D4C5B0,#C9B5A5);border-radius:2px;"></div>
+      <div class="map-pin">📍</div>
+      <div style="position:absolute;bottom:24px;left:24px;right:24px;background:white;padding:16px;border-radius:2px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#2C1810;">Lumière Beauty Studio</div>
+        <div style="font-size:12px;color:#7A5645;margin-top:4px;">123 Rose Garden Complex · Open Today 9AM–8PM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="footer-brand-logo">Lumière <span>Beauty</span></span>
+      <p class="footer-brand-desc">A women-only luxury beauty studio specialising in bridal makeup, skincare, and premium beauty services. Where every woman becomes extraordinary.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social">📷</a>
+        <a href="#" class="footer-social">📘</a>
+        <a href="#" class="footer-social">▶</a>
+        <a href="https://wa.me/919999999999" class="footer-social" target="_blank">💬</a>
+      </div>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="#services">Bridal Makeup</a></li>
+        <li><a href="#services">HD Makeup</a></li>
+        <li><a href="#services">Party Makeup</a></li>
+        <li><a href="#services">Hair Styling</a></li>
+        <li><a href="#services">Skincare</a></li>
+        <li><a href="#services">Nail Art</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Quick Links</span>
+      <ul class="footer-links">
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#packages">Bridal Packages</a></li>
+        <li><a href="#team">Our Artists</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <span class="footer-col-title">Hours</span>
+      <ul class="footer-links">
+        <li><a href="#">Mon–Sat · 9AM – 8PM</a></li>
+        <li><a href="#">Sunday · By Appointment</a></li>
+        <li><a href="#">Bridal: All days</a></li>
+      </ul>
+      <div style="margin-top:24px;">
+        <span class="footer-col-title">Contact</span>
+        <ul class="footer-links">
+          <li><a href="tel:+919999999999">+91 99999 99999</a></li>
+          <li><a href="https://wa.me/919999999999" target="_blank">WhatsApp Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Lumière Beauty Studio. All rights reserved. Women-Only Salon.</span>
+    <span class="footer-tagline">"Where elegance meets beauty"</span>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+});
+
+function animateCursorRing() {
+  rx += (mx - rx - 16) * 0.12;
+  ry += (my - ry - 16) * 0.12;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px)`;
+  requestAnimationFrame(animateCursorRing);
+}
+animateCursorRing();
+
+document.querySelectorAll('a, button, .service-card, .portfolio-category-card, .gallery-nav, .gallery-thumb, .team-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform += ' scale(2)';
+    cursorRing.style.width = '50px';
+    cursorRing.style.height = '50px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursorRing.style.width = '32px';
+    cursorRing.style.height = '32px';
+  });
+});
+
+// NAVBAR SCROLL
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
+});
+
+// MOBILE MENU
+document.getElementById('hamburger').onclick = () => document.getElementById('mobileMenu').classList.add('open');
+document.getElementById('mobileClose').onclick = closeMobileMenu;
+function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+// PARTICLES
+function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#C9956B', '#D4AF6A', '#EDD5C8', '#B8924A', '#E8C4A8'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 1;
+    p.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration: ${Math.random() * 15 + 10}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+// SCROLL REVEAL
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// COUNTER ANIMATION
+function animateCounter(el, target, suffix = '') {
+  const dur = 1800;
+  const start = Date.now();
+  const timer = setInterval(() => {
+    const elapsed = Date.now() - start;
+    const progress = Math.min(elapsed / dur, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target) + suffix;
+    if (progress === 1) clearInterval(timer);
+  }, 16);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const count = parseInt(el.dataset.count);
+      const suffix = el.dataset.count === '100' ? '%' : '+';
+      animateCounter(el, count, suffix);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// TESTIMONIALS SLIDER
+const track = document.getElementById('testimonialsTrack');
+const dots = document.querySelectorAll('.slider-dot');
+let currentSlide = 0;
+const totalSlides = 5;
+let autoSlideTimer;
+
+function getCardWidth() {
+  const card = track.querySelector('.testimonial-card');
+  return card ? card.offsetWidth + 32 : 412;
+}
+
+function goToSlide(n) {
+  currentSlide = (n + totalSlides) % totalSlides;
+  track.style.transform = `translateX(-${currentSlide * getCardWidth()}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+
+document.getElementById('sliderPrev').onclick = () => { goToSlide(currentSlide - 1); resetAuto(); };
+document.getElementById('sliderNext').onclick = () => { goToSlide(currentSlide + 1); resetAuto(); };
+dots.forEach((d, i) => d.addEventListener('click', () => { goToSlide(i); resetAuto(); }));
+
+function resetAuto() {
+  clearInterval(autoSlideTimer);
+  autoSlideTimer = setInterval(() => goToSlide(currentSlide + 1), 4500);
+}
+resetAuto();
+
+// ——— PORTFOLIO GALLERY DATA ———
+// Add images here: { src: 'url', caption: 'description', alt: 'accessibility text' }
+const PORTFOLIO_GALLERIES = {
+  'bridal-makeup': {
+    title: 'Bridal Makeup',
+    titleEm: 'Collection',
+    meta: 'Signature bridal transformations',
+    images: [
+      { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=85&auto=format&fit=crop', caption: 'Royal bridal glamour — classic red lip & luminous skin', alt: 'Bridal makeup classic look' },
+      { src: 'https://images.unsplash.com/photo-1522337360788-8eee6154e1f8?w=1400&q=85&auto=format&fit=crop', caption: 'Soft romantic bridal — dewy finish & natural glow', alt: 'Soft bridal makeup' },
+      { src: 'https://images.unsplash.com/photo-1487412940904-118106001604?w=1400&q=85&auto=format&fit=crop', caption: 'Contemporary bride — sculpted features & rose tones', alt: 'Modern bridal makeup' },
+      { src: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=1400&q=85&auto=format&fit=crop', caption: 'Traditional elegance — rich pigments & defined eyes', alt: 'Traditional bridal look' },
+      { src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=85&auto=format&fit=crop', caption: 'Golden hour bride — warm bronzed complexion', alt: 'Warm bridal makeup' },
+      { src: 'https://images.unsplash.com/photo-1469334031218-e42a5846bafd?w=1400&q=85&auto=format&fit=crop', caption: 'Minimal luxe — flawless base with nude palette', alt: 'Minimal bridal makeup' }
+    ]
+  },
+  'reception': {
+    title: 'Reception',
+    titleEm: 'Looks',
+    meta: 'Evening celebration & HD finishes',
+    images: [
+      { src: 'https://images.unsplash.com/photo-1487412940904-118106001604?w=1400&q=85&auto=format&fit=crop', caption: 'Reception glow — camera-ready HD complexion', alt: 'Reception makeup look' },
+      { src: 'https://images.unsplash.com/photo-1522337360788-8eee6154e1f8?w=1400&q=85&auto=format&fit=crop', caption: 'Smoky evening glam — dramatic eyes & sculpted cheek', alt: 'Evening glam makeup' },
+      { src: 'https://images.unsplash.com/photo-1596462502278-5bf4c9d64af7?w=1400&q=85&auto=format&fit=crop', caption: 'Bold berry lip — statement reception finish', alt: 'Berry lip reception look' },
+      { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=85&auto=format&fit=crop', caption: 'Classic reception elegance — timeless sophistication', alt: 'Classic reception makeup' },
+      { src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=85&auto=format&fit=crop', caption: 'Champagne shimmer — luminous evening radiance', alt: 'Shimmer reception look' }
+    ]
+  },
+  'engagement': {
+    title: 'Engagement',
+    titleEm: 'Portfolio',
+    meta: 'Romantic pre-wedding artistry',
+    images: [
+      { src: 'https://images.unsplash.com/photo-1606800052055-536a3ddc2f1f?w=1400&q=85&auto=format&fit=crop', caption: 'Engagement elegance — soft pink tones & flutter lashes', alt: 'Engagement makeup' },
+      { src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=85&auto=format&fit=crop', caption: 'Dreamy pastels — ethereal romantic finish', alt: 'Pastel engagement look' },
+      { src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1400&q=85&auto=format&fit=crop', caption: 'Garden engagement — fresh florals & natural glow', alt: 'Garden engagement makeup' },
+      { src: 'https://images.unsplash.com/photo-1522673606160-9513a3e2e4c6?w=1400&q=85&auto=format&fit=crop', caption: 'Candlelit romance — warm peach & golden highlight', alt: 'Warm engagement look' },
+      { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=85&auto=format&fit=crop', caption: 'Regal engagement — defined brows & jewel tones', alt: 'Regal engagement makeup' }
+    ]
+  },
+  'party-makeup': {
+    title: 'Party',
+    titleEm: 'Makeup',
+    meta: 'Festive glamour & celebration looks',
+    images: [
+      { src: 'https://images.unsplash.com/photo-1596462502278-5bf4c9d64af7?w=1400&q=85&auto=format&fit=crop', caption: 'Sangeet sparkle — bold pigment & glitter accent', alt: 'Party makeup sangeet' },
+      { src: 'https://images.unsplash.com/photo-1522337360788-8eee6154e1f8?w=1400&q=85&auto=format&fit=crop', caption: 'Cocktail chic — sculpted contour & glossy lip', alt: 'Cocktail party makeup' },
+      { src: 'https://images.unsplash.com/photo-1487412940904-118106001604?w=1400&q=85&auto=format&fit=crop', caption: 'Festive fuchsia — vibrant celebration palette', alt: 'Festive party makeup' },
+      { src: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1400&q=85&auto=format&fit=crop', caption: 'Mehendi glow — warm copper & bronze tones', alt: 'Mehendi party look' },
+      { src: 'https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=1400&q=85&auto=format&fit=crop', caption: 'Night-out glam — dramatic liner & full lashes', alt: 'Night party makeup' }
+    ]
+  },
+  'hair-styling': {
+    title: 'Hair',
+    titleEm: 'Styling',
+    meta: 'Bridal couture hairstyles',
+    images: [
+      { src: 'https://images.unsplash.com/photo-1521590839619-a15c0966a4de?w=1400&q=85&auto=format&fit=crop', caption: 'Classic bridal updo — soft waves & pearl accents', alt: 'Bridal updo hairstyle' },
+      { src: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=1400&q=85&auto=format&fit=crop', caption: 'Romantic loose curls — volume & movement', alt: 'Bridal curls hairstyle' },
+      { src: 'https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=1400&q=85&auto=format&fit=crop', caption: 'Sleek low bun — minimalist modern bride', alt: 'Low bun bridal hair' },
+      { src: 'https://images.unsplash.com/photo-1492106087820-71f1a00d0b59?w=1400&q=85&auto=format&fit=crop', caption: 'Braided crown — intricate traditional styling', alt: 'Braided bridal hairstyle' },
+      { src: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=1400&q=85&auto=format&fit=crop', caption: 'Side-swept elegance — face-framing softness', alt: 'Side swept bridal hair' }
+    ]
+  }
+};
+
+// Update category card counts from data
+document.querySelectorAll('.portfolio-category-card').forEach(card => {
+  const key = card.dataset.gallery;
+  const gallery = PORTFOLIO_GALLERIES[key];
+  if (gallery) {
+    const countEl = card.querySelector('.portfolio-cat-count');
+    if (countEl) countEl.textContent = `${gallery.images.length} Look${gallery.images.length !== 1 ? 's' : ''}`;
+  }
+});
+
+// PORTFOLIO GALLERY MODAL
+const galleryModal = document.getElementById('galleryModal');
+const galleryMainImg = document.getElementById('galleryMainImg');
+const galleryCaption = document.getElementById('galleryCaption');
+const galleryCounter = document.getElementById('galleryCounter');
+const galleryThumbs = document.getElementById('galleryThumbs');
+const galleryModalTitle = document.getElementById('galleryModalTitle');
+const galleryModalMeta = document.getElementById('galleryModalMeta');
+let activeGallery = null;
+let galleryIndex = 0;
+
+function openGallery(key) {
+  activeGallery = PORTFOLIO_GALLERIES[key];
+  if (!activeGallery) return;
+  galleryIndex = 0;
+  const em = activeGallery.titleEm ? `<em>${activeGallery.titleEm}</em>` : '';
+  galleryModalTitle.innerHTML = `${activeGallery.title} ${em}`;
+  galleryModalMeta.textContent = activeGallery.meta;
+  buildGalleryThumbs();
+  showGalleryImage(0, false);
+  galleryModal.classList.add('open');
+  galleryModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('gallery-open');
+}
+
+function closeGallery() {
+  galleryModal.classList.remove('open');
+  galleryModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('gallery-open');
+  activeGallery = null;
+}
+
+function buildGalleryThumbs() {
+  galleryThumbs.innerHTML = '';
+  activeGallery.images.forEach((img, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', `View image ${i + 1}`);
+    btn.innerHTML = `<img src="${img.src.replace('w=1400', 'w=150')}" alt="" loading="lazy">`;
+    btn.addEventListener('click', () => showGalleryImage(i));
+    galleryThumbs.appendChild(btn);
+  });
+}
+
+function showGalleryImage(index, animate = true) {
+  if (!activeGallery) return;
+  const total = activeGallery.images.length;
+  galleryIndex = (index + total) % total;
+  const item = activeGallery.images[galleryIndex];
+  galleryMainImg.classList.remove('loaded');
+  if (animate) {
+    galleryMainImg.style.opacity = '0';
+    setTimeout(() => loadGalleryImage(item), 120);
+  } else {
+    loadGalleryImage(item);
+  }
+  galleryCaption.textContent = item.caption;
+  galleryCounter.textContent = `${galleryIndex + 1} / ${total}`;
+  document.getElementById('galleryPrev').disabled = total <= 1;
+  document.getElementById('galleryNext').disabled = total <= 1;
+  galleryThumbs.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === galleryIndex);
+    if (i === galleryIndex) t.scrollIntoView({ behavior: 'smooth', inline: 'nearest', block: 'nearest' });
+  });
+}
+
+function loadGalleryImage(item) {
+  galleryMainImg.alt = item.alt || item.caption;
+  const img = new Image();
+  img.onload = () => {
+    galleryMainImg.src = item.src;
+    galleryMainImg.classList.add('loaded');
+    galleryMainImg.style.opacity = '';
+  };
+  img.src = item.src;
+}
+
+document.querySelectorAll('.portfolio-category-card').forEach(card => {
+  const open = () => openGallery(card.dataset.gallery);
+  card.addEventListener('click', open);
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
+});
+
+document.getElementById('galleryClose').onclick = closeGallery;
+document.getElementById('galleryBackdrop').onclick = closeGallery;
+document.getElementById('galleryPrev').onclick = () => showGalleryImage(galleryIndex - 1);
+document.getElementById('galleryNext').onclick = () => showGalleryImage(galleryIndex + 1);
+
+document.addEventListener('keydown', e => {
+  if (!galleryModal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeGallery();
+  if (e.key === 'ArrowLeft') showGalleryImage(galleryIndex - 1);
+  if (e.key === 'ArrowRight') showGalleryImage(galleryIndex + 1);
+});
+
+// Swipe support for gallery (touch devices)
+let touchStartX = 0;
+galleryModal.querySelector('.gallery-viewer').addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+galleryModal.querySelector('.gallery-viewer').addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].screenX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) showGalleryImage(galleryIndex + 1);
+    else showGalleryImage(galleryIndex - 1);
+  }
+}, { passive: true });
+
+// HERO SLIDER
+const heroSlides = document.querySelectorAll('.hero-slide');
+const heroIndicatorsEl = document.getElementById('heroIndicators');
+const heroProgressBar = document.getElementById('heroProgressBar');
+const HERO_INTERVAL = 3000;
+let heroIndex = 0;
+let heroTimer = null;
+let heroProgressRAF = null;
+let heroProgressStart = 0;
+
+heroSlides.forEach((_, i) => {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'hero-indicator' + (i === 0 ? ' active' : '');
+  btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+  btn.addEventListener('click', () => goToHeroSlide(i, true));
+  heroIndicatorsEl.appendChild(btn);
+});
+
+const heroIndicators = () => heroIndicatorsEl.querySelectorAll('.hero-indicator');
+
+function goToHeroSlide(n, userTriggered = false) {
+  heroSlides[heroIndex].classList.remove('active');
+  heroIndicators()[heroIndex]?.classList.remove('active');
+  heroIndex = (n + heroSlides.length) % heroSlides.length;
+  heroSlides[heroIndex].classList.add('active');
+  heroIndicators()[heroIndex]?.classList.add('active');
+  resetHeroProgress();
+  if (userTriggered) restartHeroAutoplay();
+}
+
+function resetHeroProgress() {
+  heroProgressStart = performance.now();
+  if (heroProgressRAF) cancelAnimationFrame(heroProgressRAF);
+  function tick(now) {
+    const elapsed = now - heroProgressStart;
+    const pct = Math.min((elapsed / HERO_INTERVAL) * 100, 100);
+    heroProgressBar.style.width = pct + '%';
+    if (pct < 100) heroProgressRAF = requestAnimationFrame(tick);
+  }
+  heroProgressBar.style.width = '0%';
+  heroProgressRAF = requestAnimationFrame(tick);
+}
+
+function startHeroAutoplay() {
+  clearInterval(heroTimer);
+  resetHeroProgress();
+  heroTimer = setInterval(() => goToHeroSlide(heroIndex + 1), HERO_INTERVAL);
+}
+
+function restartHeroAutoplay() {
+  startHeroAutoplay();
+}
+
+const heroSection = document.getElementById('hero');
+heroSection.addEventListener('mouseenter', () => clearInterval(heroTimer));
+heroSection.addEventListener('mouseleave', startHeroAutoplay);
+heroSection.addEventListener('focusin', () => clearInterval(heroTimer));
+heroSection.addEventListener('focusout', startHeroAutoplay);
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  startHeroAutoplay();
+} else {
+  document.querySelector('.hero-slide-progress')?.style.setProperty('display', 'none');
+}
+
+// FAQ ACCORDION
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// SMOOTH SCROLL NAV
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
